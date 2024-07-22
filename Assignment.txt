@@ -1,0 +1,22 @@
+1.  Take Input as Full Name from Command Line Argument
+e.g amit shAshI sRivasTava
+Prepare Full Name
+Full Name must be print in Proper Case
+Amit Shashi Srivastava
+Hint : toUpperCase, toLowerCase, split 
+
+2. Print Value in this style
+Input : Java
+J
+Ja
+Jav
+Java
+Hint : String method
+
+3. Input Student Details, Command Line Arguments
+Name 
+3 Subject marks
+total 
+Percentage
+Grade
+
