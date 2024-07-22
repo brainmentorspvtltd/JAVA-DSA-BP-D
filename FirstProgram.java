@@ -15,7 +15,7 @@ class SecondClass{
     // void - no return 
     // static - load when class is loaded, so no need to create object
     //String args[] - Command Line Args - Can create ur own command
-    public static void main(String args[]){
+    static  public  void main(String ...a){
         System.out.println("Hello Java");
     }
 }
