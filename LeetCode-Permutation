@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<Integer> smallList = new ArrayList<>();
+        List<List<Integer>> bigList = new ArrayList<>();
+        helper(nums,smallList, bigList); // array and list pass by reference by default
+        return bigList;
+    }
+    void helper(int nums[], List<Integer> smallList, List<List<Integer>> bigList){
+        // Base case
+        if(nums.length == smallList.size()){
+            bigList.add(new ArrayList<>(smallList));
+            //bigList.add(smallList);
+            return ;
+        }
+        for(int i = 0; i<nums.length ; i++){
+            if(!smallList.contains(nums[i])){
+            smallList.add(nums[i]);
+            helper(nums, smallList, bigList);
+            // Stack Fall (BackTracking)
+            smallList.remove(smallList.size()-1);
+            }
+        }
+    }
+}
