@@ -1,0 +1,7 @@
+Following are the question links to attempt and submit your solution in these links
+
+https://www.geeksforgeeks.org/problems/missing-number-in-array1416/1
+https://www.geeksforgeeks.org/problems/professor-and-parties2000/1
+https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1
+https://www.geeksforgeeks.org/problems/palindrome-string0817/1
+https://www.geeksforgeeks.org/problems/anagram-1587115620/1
