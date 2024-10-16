@@ -1,0 +1,53 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int pair [] = new int[2];
+        HashMap<Integer, Integer> map = new HashMap<>();
+        // Approach - 2 Hashing
+        for(int i = 0; i<nums.length; i++){
+            int result = target - nums[i];
+            if(map.get(result)!=null){
+                pair[0] = map.get(result);
+                pair[1] = i;
+            }
+            else{
+                map.put(nums[i], i);
+            }
+        }
+        return pair;
+        /*
+        // Approach - 1 Sort with 2 Pointor
+        int aux [] = Arrays.copyOf(nums, nums.length);
+        Arrays.sort(aux);
+        int i = 0;
+        int j =  nums.length -1 ;
+        while(i<j){
+            int sum = aux[i] + aux[j];
+            if(sum == target){
+                break;
+            }
+            else if(sum>target){
+                j--;
+            }
+            else{
+                i++;
+            }
+        }
+        int pair [] = new int[2];
+        for(int k = 0; k<nums.length; k++){
+            if(nums[k] == aux[i]){
+                pair[0] = k;
+               
+            }
+          
+        }
+        for(int k = nums.length-1; k>=0; k--){
+            if(nums[k] == aux[j]){
+                pair[1] = k;
+               
+            }
+          
+        }
+        return pair;
+        */
+    }
+}
