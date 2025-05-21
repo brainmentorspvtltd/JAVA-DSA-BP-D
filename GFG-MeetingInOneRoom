@@ -1,0 +1,50 @@
+class Solution {
+   /*
+   
+   This is nearly identical to the Activity Selection Problem, but with a twist —
+   you need to return how many meetings can be held in a room without overlap.
+   */
+   // Helper class to represent a Meeting
+    class Meeting {
+        int start, end;
+
+        Meeting(int s, int e) {
+            start = s;
+            end = e;
+        }
+    }
+    public int maxMeetings(int start[], int end[]) {
+        // Approach
+        /*
+        Sort meetings by end time
+	    Always pick a meeting only if its start time > last selected meeting’s end time
+        */
+         // Total number of meetings = start.length
+        int len = start.length;
+
+        // Step 1: Store meetings as objects
+        List<Meeting> meetings = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            meetings.add(new Meeting(start[i], end[i]));
+        }
+
+        // Step 2: Sort meetings by end time (Greedy)
+        meetings.sort((a, b) -> a.end - b.end);
+
+        // Step 3: Select the first meeting
+        int count = 1;
+        int lastEnd = meetings.get(0).end;
+
+        // Step 4: Loop through remaining meetings
+        for (int i = 1; i < len; i++) {
+            Meeting current = meetings.get(i);
+            if (current.start > lastEnd) {
+                count++;
+                lastEnd = current.end;
+            }
+        }
+
+        return count;
+        
+    }
+}
