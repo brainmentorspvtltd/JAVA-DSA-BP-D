@@ -1,0 +1,31 @@
+class Solution{
+public boolean lemonadeChange(int[] bills) {
+        int five = 0;  // Count of $5 notes
+        int ten = 0;   // Count of $10 notes
+
+        for (int bill : bills) {
+            if (bill == 5) {
+                // Perfect! No change needed
+                five++;
+            } else if (bill == 10) {
+                if (five == 0) return false; // Can't give $5 as change
+                five--;  // Give $5 back
+                ten++;   // Got a $10 note
+            } else if (bill == 20) {
+                // Prefer giving $10 + $5 if possible
+                if (ten > 0 && five > 0) {
+                    ten--;
+                    five--;
+                } 
+                // Else try giving 3 x $5 notes
+                else if (five >= 3) {
+                    five -= 3;
+                } else {
+                    return false; // Can't give $15 change
+                }
+            }
+        }
+
+        return true; // Able to give change to all customers
+    }
+}
