@@ -1,0 +1,50 @@
+class Solution {
+    /*
+    You are given two arrays:
+	•	start[]: Start time of n activities
+	•	end[]: End time of n activities
+
+You can attend only one activity at a time.
+Return the maximum number of non-overlapping activities you can attend.
+    */
+      class Activity {
+        int start, end;
+        Activity(int s, int e) {
+            start = s;
+            end = e;
+        }
+    }
+    public int activitySelection(int[] start, int[] finish) {
+        /*
+        	1.	Create an array of activities with their start and end times.
+	2.	Sort all activities by end time (not start time!).
+	3.	Initialize a counter, and set lastEndTime = 0.
+	4.	For each activity:
+	•	If its start time is after or equal to lastEndTime, select it.
+	•	Update lastEndTime and increase count.
+        */
+         // Step 1: Store all activities
+        int n = start.length;
+
+        // Step 1: Create array of Activity objects
+        Activity[] activities = new Activity[n];
+        for (int i = 0; i < n; i++) {
+            activities[i] = new Activity(start[i], finish[i]);
+        }
+
+        // Step 2: Sort by end time (Greedy key step)
+        Arrays.sort(activities, (a, b) -> a.end - b.end);
+
+        int count = 1; // Select the first activity by default
+        int lastEnd = activities[0].end;
+
+        // Step 3: Select non-overlapping activities greedily
+        for (int i = 1; i < n; i++) {
+            if (activities[i].start > lastEnd) {
+                count++;
+                lastEnd = activities[i].end;
+            }
+        }
+
+        return count;
+    }
