@@ -1,0 +1,68 @@
+class Job {
+    int id, deadline, profit;
+
+    Job(int id, int deadline, int profit) {
+        this.id = id;
+        this.deadline = deadline;
+        this.profit = profit;
+    }
+}
+class Solution {
+    /*
+    You are given an array of Jobs, where each job has:
+		id: Job ID (e.g., A, B, C…)
+		deadline: Last time by which the job should be completed
+		profit: Profit if the job is completed before or on its deadline
+
+Each job takes 1 unit of time, and only one job can be scheduled at a time.
+
+Your task: Schedule jobs to maximize total profit, and return:
+    */
+    public ArrayList<Integer> jobSequencing(int[] deadline, int[] profit) {
+        /*
+        Greedy Strategy
+	1.	Sort jobs by descending profit
+→ Try to do most profitable jobs first
+	2.	Use a slot array (Hashing) (time slots) to assign jobs at the latest possible time before deadline
+→ So earlier slots are free for other jobs
+        */
+        
+        int n = deadline.length;
+        Job[] jobs = new Job[n];
+for (int i = 0; i < n; i++) {
+    jobs[i] = new Job(i + 1, deadline[i], profit[i]); // id = i+1
+}
+         // Step 1: Sort jobs by descending profit
+        Arrays.sort(jobs, (a, b) -> b.profit - a.profit);
+
+        // Step 2: Find max deadline to know how many slots we need
+        int maxDeadline = 0;
+        for (Job job : jobs) {
+            maxDeadline = Math.max(maxDeadline, job.deadline);
+        }
+
+        // Step 3: Initialize time slots (0 = empty, 1 = booked)
+        boolean[] slot = new boolean[maxDeadline + 1]; // 1-based indexing
+        int countJobs = 0;
+        int totalProfit = 0;
+
+        // Step 4: Try to assign each job
+        for (Job job : jobs) {
+            // Find a free slot from job.deadline down to 1
+            for (int j = job.deadline; j > 0; j--) {
+                if (!slot[j]) { // slot is false (it means i dont use that job)
+                    slot[j] = true;         // mark slot as booked
+                    countJobs++;           // count this job
+                    totalProfit += job.profit; // add profit
+                    break;                 // job scheduled
+                }
+            }
+        }
+
+         ArrayList<Integer> res = new ArrayList<>();
+        res.add(countJobs);
+        res.add(totalProfit);
+        return res;
+    }
+}
+
